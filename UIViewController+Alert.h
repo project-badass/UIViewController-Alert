@@ -10,6 +10,7 @@
 
 - (void)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message;
 - (void)showActionSheetWithTitle:(NSString *)title message:(NSString *)message options:(NSArray *)options handlers:(NSArray *)handlers;
+- (void)showActionSheetWithTitle:(NSString *)title message:(NSString *)message options:(NSArray *)options handlers:(NSArray *)handlers presentFromView:(UIView *)presentingView;
 
 @end
 

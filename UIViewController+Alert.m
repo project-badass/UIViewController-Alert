@@ -29,6 +29,10 @@
 }
 
 - (void)showActionSheetWithTitle:(NSString *)title message:(NSString *)message options:(NSArray *)options handlers:(NSArray *)handlers {
+    [self showActionSheetWithTitle:title message:message options:options handlers:handlers presentFromView:nil];
+}
+
+- (void)showActionSheetWithTitle:(NSString *)title message:(NSString *)message options:(NSArray *)options handlers:(NSArray *)handlers presentFromView:(UIView *)presentingView {
     if ([UIAlertController class]) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
                                                                        message:message
@@ -53,6 +57,13 @@
                                  style:UIAlertActionStyleCancel
                                  handler:nil];
         [alert addAction:cancel];
+        
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            [alert setModalPresentationStyle:UIModalPresentationPopover];
+            UIPopoverPresentationController *popPresenter = [alert popoverPresentationController];
+            popPresenter.sourceView = presentingView;
+        }
+        
         [self presentViewController:alert animated:YES completion:nil];
     } else {
         [UIActionSheet showInView:self.view
