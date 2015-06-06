@@ -36,12 +36,14 @@
         for (int i = 0; i < options.count; i++) {
             NSString *optionTitle = options[i];
             UIAlertAction *action = [UIAlertAction
-                                              actionWithTitle:optionTitle
-                                              style:UIAlertActionStyleDefault
-                                              handler:^(UIAlertAction * action) {
-                                                  void (^handler)(void) = handlers[i];
-                                                  handler();
-                                              }];
+                                     actionWithTitle:optionTitle
+                                     style:UIAlertActionStyleDefault
+                                     handler:^(UIAlertAction * action) {
+                                         if (i < handlers.count) {
+                                             void (^handler)(void) = handlers[i];
+                                             handler();
+                                         }
+                                     }];
             
             [alert addAction:action];
         }
@@ -59,11 +61,12 @@
            destructiveButtonTitle:nil
                 otherButtonTitles:options
                          tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
-                             void (^handler)(void) = handlers[buttonIndex];
-                             handler();
+                             if (buttonIndex < handlers.count) {
+                                 void (^handler)(void) = handlers[buttonIndex];
+                                 handler();
+                             }
                          }];
     }
 }
 
 @end
-
