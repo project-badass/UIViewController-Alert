@@ -32,6 +32,20 @@
     [self showActionSheetWithTitle:title message:message options:options handlers:handlers presentFromView:nil];
 }
 
+- (void)showiPadActionSheetWithTitle:(NSString *)title message:(NSString *)message options:(NSArray *)options handlers:(NSArray *)handlers presentFromTable:(UITableView *)presentingTable withIndexPath:(NSIndexPath *)indexPath {
+    CGRect cellRect = [presentingTable cellForRowAtIndexPath:indexPath].frame;
+    cellRect.origin.y += cellRect.size.height * 2;
+    cellRect.origin.y -= presentingTable.contentOffset.y;
+    cellRect.size.height = 1;
+    
+    [UIActionSheet showFromRect:cellRect inView:self.view animated:YES withTitle:title cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:options tapBlock:^(UIActionSheet *actionSheet, NSInteger buttonIndex) {
+        if (buttonIndex < handlers.count) {
+            void (^handler)(void) = handlers[buttonIndex];
+            handler();
+        }
+    }];
+}
+
 - (void)showActionSheetWithTitle:(NSString *)title message:(NSString *)message options:(NSArray *)options handlers:(NSArray *)handlers presentFromView:(UIView *)presentingView {
     if ([UIAlertController class]) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
