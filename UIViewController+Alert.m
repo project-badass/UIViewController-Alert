@@ -10,12 +10,16 @@
 @implementation UIViewController (Alert)
 
 - (void)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message {
+    [self showAlertWithTitle:title andMessage:message andCancelButtonTitle:@"OK"];
+}
+
+- (void)showAlertWithTitle:(NSString *)title andMessage:(NSString *)message andCancelButtonTitle:(NSString *)cancelButtonTitle {
     if ([UIAlertController class]) {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
                                                                        message:message
                                                                 preferredStyle:UIAlertControllerStyleAlert];
         UIAlertAction *ok = [UIAlertAction
-                             actionWithTitle:@"OK"
+                             actionWithTitle:cancelButtonTitle
                              style:UIAlertActionStyleDefault
                              handler:^(UIAlertAction * action) {
                                  [alert dismissViewControllerAnimated:YES completion:nil];
@@ -23,8 +27,7 @@
         [alert addAction:ok];
         [self presentViewController:alert animated:YES completion:nil];
     } else {
-        [[[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil] show];
-        
+        [[[UIAlertView alloc] initWithTitle:title message:message delegate:nil cancelButtonTitle:cancelButtonTitle otherButtonTitles:nil] show];
     }
 }
 
