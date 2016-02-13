@@ -4,7 +4,7 @@ iOS7 and 8 compatible convenience methods for displaying alerts and action sheet
 
 ## Installation 
 
-Use Cocoapods to add to your project:
+Use CocoaPods to add to your project:
 ```
 pod 'UIViewController+Alert'
 ```
