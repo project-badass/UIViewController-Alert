@@ -6,8 +6,8 @@ Pod::Spec.new do |s|
   s.homepage     = "https://github.com/project-badass/UIViewController-Alert"
   s.authors            = { "Ameesh Kapoor" => "ameesh@gmail.com",
                            "Jim Cervone" => "jimcervone@gmail.com" }
-  s.platform     = :ios, "7.0"
-  s.source       = { :git => "https://github.com/project-badass/UIViewController-Alert.git", :tag => "0.0.4" }
+  s.platform     = :ios, "8.0"
+  s.source       = { :git => "https://github.com/project-badass/UIViewController-Alert.git", :tag => "0.0.5" }
   s.source_files  = "UIViewController+Alert.{h,m}"
   s.frameworks = "UIKit"
 end
